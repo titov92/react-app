@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Child from "./Child";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            age: 25,
+            name: 'Stepan',
+            buttonText: 'Show',
+            isVisible: true
+        }
+    }
+
+    setAge= ()=>{
+
+        if (this.state.buttonText === 'Show') {
+            this.setState({
+                age: 30,
+                name: 'Mykola',
+                buttonText: 'Hide',
+                isVisible: true
+            });
+        } else {
+            this.setState({
+                age: 25,
+                name: 'Stepan',
+                buttonText: 'Show',
+                isVisible: false
+            });
+        }
+    }
+    render() {
+        return (
+            <div>
+                <Child isVisible={this.state.isVisible} name={this.state.name} age={this.state.age} />
+                <button onClick={this.setAge}>{this.state.buttonText}</button>
+            </div>
+        );
+    }
 }
 
 export default App;
