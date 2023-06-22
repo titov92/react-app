@@ -181,3 +181,6 @@ li {
 .reset:hover {
   cursor: pointer;
 }
+ul.space-list-items {
+  text-align: center;
+}

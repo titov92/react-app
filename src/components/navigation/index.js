@@ -16,7 +16,7 @@ const Nav = () => {
             </ul>
             <Outlet />
         </>
-    )
-}
+    );
+};
 
 export default Nav;

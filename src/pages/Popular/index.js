@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { fetchPopularRepos } from "./api";
-import Tabs from "./Tabs";
+import { fetchPopularRepos } from '../../api/requests';
+import Tabs from '../../components/navigation/Tabs';
+import Loader from '../../components/Loader';
 
 import { useSearchParams } from "react-router-dom";
 
@@ -32,13 +33,7 @@ const Popular = () => {
         fetchData();
     }, [selectedLanguage]);
 
-    const Loader = () => {
-        return (
-            <>
-                Loading ...
-            </>
-        );
-    };
+
 
     const RepList = ({ repos }) => {
         return (
