@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import Loader from '../../components/Loader';
 
 
-const RepList  = () => {
-    const repos = useSelector((state) => state.popularReducer.repos);
+const RepList = () => {
+    const repos = useSelector((state) => state.popular.repos);
 
     return (
         <ul className='popular-list'>
@@ -35,9 +35,10 @@ const RepList  = () => {
     );
 };
 
+
 const Repository = () => {
-    const loading = useSelector((state) => state.popularReducer.loading);
-    const error = useSelector((state) => state.popularReducer.error);
+    const loading = useSelector((state) => state.popular.loading);
+    const error = useSelector((state) => state.popular.error);
 
     if (error) return <p>Error: {error}</p>;
 
@@ -47,6 +48,7 @@ const Repository = () => {
 
     return <>{renderRepos()}</>;
 };
+
 const Popular = () => (
     <>
         <Tabs />

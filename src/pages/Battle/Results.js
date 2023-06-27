@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import Player from './Player';
 import Loader from '../../components/Loader';
-import { getRepos } from '../../state/battle/battle.thunk';
+import { getRepos } from '../../state/battle/battle.request';
 
 const Results = () => {
     const dispatch = useDispatch();
@@ -11,10 +11,10 @@ const Results = () => {
     const playerOneName = searchParams.get('playerOneName');
     const playerTwoName = searchParams.get('playerTwoName');
 
-    const loading = useSelector((state) => state.battleReducer.loading);
-    const error = useSelector((state) => state.battleReducer.error);
-    const winner = useSelector((state) => state.battleReducer.winner);
-    const loser = useSelector((state) => state.battleReducer.loser);
+    const loading = useSelector((state) => state.battle.loading);
+    const error = useSelector((state) => state.battle.error);
+    const winner = useSelector((state) => state.battle.winner);
+    const loser = useSelector((state) => state.battle.loser);
 
     useEffect(() => {
         dispatch(getRepos({ playerOneName, playerTwoName }));
@@ -32,11 +32,7 @@ const Results = () => {
                         score={winner.score}
                         profile={winner.profile}
                     />
-                    <Player
-                        label='Loser'
-                        score={loser.score}
-                        profile={loser.profile}
-                    />
+                    <Player label='Loser' score={loser.score} profile={loser.profile} />
                 </div>
             ) : null}
         </>

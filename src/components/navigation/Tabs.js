@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { getRepos } from '../../state/popular/popular.thunk';
+import { getRepos } from '../../state/popular/popular.request';
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
@@ -10,9 +10,9 @@ const Tabs = () => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     const selectedLanguage = useSelector(
-        (state) => state.popularReducer.selectedLanguage
+        (state) => state.popular.selectedLanguage
     );
-    const loading = useSelector((state) => state.popularReducer.loading);
+    const loading = useSelector((state) => state.popular.loading);
 
     const handleTabClick = (language) => {
         dispatch(getRepos(language));

@@ -1,6 +1,6 @@
 import { memo, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setUsersAction } from '../../state/battle/battle.action';
+import { setUsers } from '../../state/battle/battle.slice';
 
 const PlayerInput = memo(({ id, label }) => {
     const dispatch = useDispatch();
@@ -9,7 +9,7 @@ const PlayerInput = memo(({ id, label }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch(setUsersAction({ id, userName }));
+        dispatch(setUsers({ id, userName }));
     };
 
     return (
