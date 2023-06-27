@@ -1,65 +1,46 @@
-import { useState } from 'react';
 import PlayerInput from './PlayerInput';
 import PlayerPreview from './PlayerPreview';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteUserAction } from '../../state/battle/battle.action';
 
 const Battle = () => {
-    const [playerData, setPlayerData] = useState({
-        playerOneName: '',
-        playerTwoName: '',
-        playerOneImage: '',
-        playerTwoImage: '',
-    });
-
-    const handleSubmit = (id, userName) => {
-        setPlayerData((prevState) => ({
-            ...prevState,
-            [`${id}Name`]: userName,
-            [`${id}Image`]: `https://github.com/${userName}.png?size200`,
-        }));
-    };
-
-    const handleReset = (id) => {
-        setPlayerData((prevState) => ({
-            ...prevState,
-            [`${id}Name`]: '',
-            [`${id}Image`]: null,
-        }));
-    };
+    const dispatch = useDispatch();
+    const users = useSelector((state) => state.battleReducer.users);
 
     return (
         <div>
             <div className='row'>
-                {playerData.playerOneImage ? (
-                    <PlayerPreview
-                        avatar={playerData.playerOneImage}
-                        userName={playerData.playerOneName}
-                    >
-                        <button className='reset' onClick={() => handleReset('playerOne')}>
+                {users.firstImage ? (
+                    <PlayerPreview avatar={users.firstImage} userName={users.first}>
+                        <button
+                            className='reset'
+                            onClick={() => dispatch(deleteUserAction('first'))}
+                        >
                             Reset
                         </button>
                     </PlayerPreview>
                 ) : (
-                    <PlayerInput id='playerOne' label={1} onSubmit={handleSubmit} />
+                    <PlayerInput id='first' label={1} />
                 )}
-                {playerData.playerTwoImage ? (
-                    <PlayerPreview
-                        avatar={playerData.playerTwoImage}
-                        userName={playerData.playerTwoName}
-                    >
-                        <button className='reset' onClick={() => handleReset('playerTwo')}>
+                {users.secondImage ? (
+                    <PlayerPreview avatar={users.secondImage} userName={users.second}>
+                        <button
+                            className='reset'
+                            onClick={() => dispatch(deleteUserAction('second'))}
+                        >
                             Reset
                         </button>
                     </PlayerPreview>
                 ) : (
-                    <PlayerInput id='playerTwo' label={2} onSubmit={handleSubmit} />
+                    <PlayerInput id='second' label={2} />
                 )}
             </div>
-            {playerData.playerOneImage && playerData.playerTwoImage ? (
+            {users.firstImage && users.secondImage ? (
                 <Link
                     to={{
                         pathname: 'results',
-                        search: `?playerOneName=${playerData.playerOneName}&playerTwoName=${playerData.playerTwoName}`,
+                        search: `?playerOneName=${users.first}&playerTwoName=${users.second}`,
                     }}
                     className='button'
                 >

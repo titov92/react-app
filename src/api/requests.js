@@ -50,7 +50,7 @@ export const makeBattle = (players) => {
         .catch(handleError);
 };
 
-export const fetchPopularRepos = (language) => {
+export const getReposRequest = (language) => {
     return axios
         .get(
             window.encodeURI(
